@@ -15,6 +15,7 @@ body {
   height:auto;
   background-color: #1f1f1f;
   text-align: center;
+  margin-left: 30px;
 }
 
 img {
@@ -54,3 +55,17 @@ p{
   font-weight: 400;
 }
 
+
+
+@media (min-width:550px){
+
+  html {
+    display: flex;
+    justify-content: center;
+  }
+
+  body {
+    width: 60%;
+  }
+
+}
