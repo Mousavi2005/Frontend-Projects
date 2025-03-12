@@ -19,7 +19,7 @@ body {
   /* align-content: center; */
   width:320px;
   border: 2px solid black;
-  height:600px;
+  height:80vh;
   background-color: #1f1f1f;
 }
 
@@ -71,7 +71,7 @@ p{
 
   body {
     width: 60%;
-    height: 600px;
+    height: 80vh;
   }
 
 }
