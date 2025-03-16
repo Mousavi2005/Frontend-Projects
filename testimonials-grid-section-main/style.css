@@ -1,0 +1,176 @@
+html {
+    box-sizing: border-box;
+    font-size: 13px;
+    font-family: "Inter", sans-serif;
+}
+
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+
+body {
+    background-color: #e7eaee;
+}
+
+#main-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#left, #right{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+}
+
+#top, #bottom {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+} 
+
+.container {
+    width: 80%;
+    max-width: 375px;
+    height: auto;
+    padding: 30px;
+    margin-bottom: 50px;
+    border-radius: 10px;
+}
+
+img {
+    border-radius: 50%;
+    width: 30px;
+}
+
+#img1 {
+    border: 2px solid #c4a2f6;
+}
+
+#img2 {
+    border: 2px solid cfcfcf;
+}
+
+#img3, #img5 {
+    border: 2px solid white;
+}
+
+#container1 {
+    background-color: #7541c8;
+    color: #eee5ff;
+}
+
+#container2 {
+    background-color: #48556a;
+    color: #eee5ff;
+}
+
+#container3, #container5{
+    background-color: white;
+    color: #676d7e; 
+}
+
+#container4 {
+    background-color: #19212e;
+    color: white; 
+}
+
+.imageAndName{
+    display: flex;
+    align-items: center;
+}
+
+.nameContainer {
+    margin-left: 10px;
+    line-height: 5px;
+}
+
+.name {
+    font-weight: 600;
+}
+
+
+@media (min-width: 575px) {
+    html {
+        font-size: 7px;
+        box-sizing: border-box;
+    }
+
+    *, *:before, *:after {
+        box-sizing: inherit;
+    }
+
+    #left, #right, #top, #bottom {
+        margin: 0;
+        padding: 0;
+    }
+    .container {
+        max-width: 100%;
+        width: 100%;
+        height: 100%;
+        margin: 10px;
+        padding: 15px;
+    }
+
+    #main-container {
+        flex-direction: row;
+        align-items: flex-start;
+    }
+
+    #left {
+        flex-basis: 78%;
+    }
+
+    #left, #right {
+        height: 440px;
+    }
+
+    #right {
+        flex-basis: 22%;
+        height: 460px;
+    }
+
+
+    #top, #bottom {
+        flex-direction: row;
+        align-items: flex-start;
+        height: 50%;
+    }
+
+    #top {
+        margin-bottom: 10px;
+    }
+
+    #container1, #container4 {
+        flex-basis: 68%;
+    }
+    #container2, #container3  {
+        flex-basis: 32%;
+    }
+    
+}
+
+@media (min-width:615px) {
+    html {
+        font-size: 8px;
+        box-sizing: border-box;
+    }
+
+    *, *:before, *:after {
+        box-sizing: inherit;
+    }
+}
+
+@media (min-width:755px) {
+    html {
+        font-size: 10px;
+        box-sizing: border-box;
+    }
+
+    *, *:before, *:after {
+        box-sizing: inherit;
+    }
+}
