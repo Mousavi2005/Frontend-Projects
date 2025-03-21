@@ -1,72 +1,90 @@
 html {
-    font-family: Arial, sans-serif;
-  }
-  
-  body {
-    background-color:#9a9c9a;
-  }
-  
-  #target{
-    background:white;
-    border:2px solid black;
-    
-  }
-  
-  .top p {
-    line-height:8px;
-  }
-  
-  #heading {
-    color:#02a675;
-  }
-  
-  #trial-text {
-    color:#cfe607;
-  }
-  
-  .top {
-    padding-left:20px;
-    margin-bottom:50px;
-  }
-  
-  .top p {
-    color:#ccccca;
-  }
-  
-  .bottom {
-    display:flex;
-    height:230px;
-    color:#ebedeb;
-  }
-  
-  .left {
-    box-sizing:border-box;
-    flex:50%;
-    background:#02a675;
-    font-size:18px;
-  }
-  
-  .right {
-    box-sizing:border-box;
-    font-size:15px;
-    flex:50%;
-    background:#03a824;
-  }
-  .right p {
-    line-height:6px;
-  }
-  
-  .left, .right {
-     padding-left:20px;
-  /*    padding-top:5px; */
-    
-  }
-  
-  .button {
-    background-color:#cfe607;
-    color:#ebedeb;
-    border:none;
-    width:85%;
-    height:30px;
-  }
-  
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+  border: 1px solid red;
+  background-image: url('./Dark-Jungle.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+/* .text-container {
+  width:fit-content;
+  height: 50px;
+  padding: 0px 10px;
+  background-color: white;
+  color: black;
+  display: flex;
+  align-items: center;
+  border-radius: 4px;
+} */
+
+.btn {
+  font-size: 1.5rem;
+  background: none;
+  color: white;
+  padding: 10px;
+  border-radius: 4px;
+  border: 1px solid white;
+  position: absolute;
+  bottom: 15%;
+  left: 10%;
+}
+
+.btn:hover {
+  color: black;
+  background-color: white;
+  border: 1px solid white;
+}
+
+#text {
+  width: fit-content;
+  display: inline;
+
+}
+
+#x {
+  background-color: white;
+  border: 0;
+  margin-left: 20px;
+  font-size: 1.2rem;
+}
+
+#x, .btn:hover {
+  cursor: pointer;
+}
+
+.hidden {
+  display: none;
+}
+
+.notHidden {
+  font-size: 1.2rem;
+  width:fit-content;
+  height: 60px;
+  padding: 0px 10px;
+  background-color: white;
+  color: black;
+  display: flex;
+  align-items: center;
+  border-radius: 4px;
+  animation-name: move-animation;
+  animation-fill-mode: forwards;
+  animation-duration: 2s;
+  position: relative;
+}
+
+@keyframes move-animation {
+  0% {top:-200px; left: 50%;}
+  100% {top: 40%; left: 50%;}
+}
