@@ -10,6 +10,7 @@ function App() {
     <>
       <Head />
       <Main />
+      <Main />
     </>
   )
 }

@@ -1,8 +1,8 @@
 export default function Head(){
     return (
         <div className="nav-bar">
-            <img src='./src/assets/react.svg' alt="" />
-            <span className="logo-name">ReactFacts</span>
+            <img src="./public/globe.svg" alt="globe icon" />
+            <span className="logo-name">my travel journal</span>
         </div>
     )
 }
