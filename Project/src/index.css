@@ -1,0 +1,66 @@
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+:root {
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #262626;
+  /* line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale; */
+
+}
+
+
+/* #root {
+
+} */
+
+
+.nav-bar {
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  color: white;
+  background-color: #151515;
+}
+
+.nav-bar > img {
+  margin-right: 20px;
+}
+
+.nav-bar > .logo-name {
+  font-size: 1.4rem;
+}
+
+main {
+  color: white;
+}
+
+.main-section-heading {
+  padding: 40px 20px 30px 20px;
+}
+
+.list-content {
+  padding-left: 35px;
+}
+
+.list-item {
+  /* display: flex; */
+  line-height: 2rem;
+}
+
+.list-item::marker {
+  color: aqua;
+  font-size: 1.5rem;
+}
