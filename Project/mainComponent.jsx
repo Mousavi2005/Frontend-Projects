@@ -9,7 +9,7 @@ export default function Main(props) {
             <div className="text-container">
                 <div className="location">
                     <img className="location-icon"  src='./public/location.svg' alt="" />
-                    <span className="country">Japan</span>
+                    <span className="country">{props.country}</span>
                     <a href= {props.googleMap}>view on google maps</a>
                 </div>
 
