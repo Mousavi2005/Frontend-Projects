@@ -18,7 +18,7 @@ function App() {
       </div>
       
       <div className='ingredient-container'>
-        <IngredientComponent />
+        {/* <IngredientComponent /> */}
       </div>
 
       <GetRecipe />

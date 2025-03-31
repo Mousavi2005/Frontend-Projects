@@ -1,9 +1,10 @@
-export default function ingredientComponent() {
+export default function ingredientComponent(prop) {
+    console.log(prop.name)
     return (
-        <>
-        <li>Chicken brists</li>
-        <li>Chicken brists</li>
-
-        </>
+        // <>
+        
+        <li>{prop.name}</li>
+        
+        // </>
     )
 }
