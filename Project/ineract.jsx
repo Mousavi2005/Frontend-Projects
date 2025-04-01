@@ -1,35 +1,33 @@
 import React from "react"
-import ingredientComponent from "./ingredientComponent"
-import ReactDOM from 'react-dom/client'
-// const ingredients = []
-// ingredients.push()
+import IngredientComponent from "./ingredientComponent";
 
+export default function Interact() {
+    let [element, setElement] = React.useState([])
 
-export default function interact() {
+    function addIngredient(e) {
+        e.preventDefault();
+
+        const input = document.querySelector("input")
+        const value = input.value
+        setElement(prev => [...prev,value])
+
+        input.value = ''
+
+      }
+
     return (
-        <form onSubmit={addIngredient} className="interact">
-            <input type="text" placeholder="e.g rice"/>
-            <button  className="add-ingredient-btn">+ Add ingredient</button>
-        </form>
+        <>
+            <form onSubmit={addIngredient} className="interact">
+                <input type="text" placeholder="e.g rice"/>
+                <button  className="add-ingredient-btn">+ Add ingredient</button>
+            </form>
+            <div className='body-head-text'>
+                <h2>Ingredients on hand : </h2>
+            </div>
+            <div className="ingredients-list">
+                {element.map((name, index) => <IngredientComponent key={index} name = {name} />)}
+                
+            </div>
+        </>
     )
 }
-
-function addIngredient(e) {
-    e.preventDefault();
-
-    const input = document.querySelector("input")
-    const value = input.value;
-    const element = React.createElement(ingredientComponent, { name: value });
-    const parent = document.querySelector(".ingredient-container");
-    const newDiv = document.createElement('div')
-
-    parent.appendChild(newDiv)
-    ReactDOM.createRoot(newDiv).render(element)
-
-    input.value = ''
-    // console.log(ingredients)
-
-  }
-
-
-

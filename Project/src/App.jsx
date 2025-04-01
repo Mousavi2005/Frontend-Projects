@@ -13,13 +13,10 @@ function App() {
 
       <Header />
       <Interact />
-      <div className='body-head-text'>
-        <h2>Ingredients on hand : </h2>
-      </div>
       
-      <div className='ingredient-container'>
-        {/* <IngredientComponent /> */}
-      </div>
+      {/* <div className='ingredient-container'>
+        {element}
+      </div> */}
 
       <GetRecipe />
 
