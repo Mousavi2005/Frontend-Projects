@@ -5,7 +5,7 @@ import './App.css'
 import Header from '../head'
 import Interact from '../ineract'
 import IngredientComponent from '../ingredientComponent'
-import GetRecipe from '../getRecipe'
+// import GetRecipe from '../getRecipe'
 
 function App() {
   return (
@@ -13,12 +13,6 @@ function App() {
 
       <Header />
       <Interact />
-      
-      {/* <div className='ingredient-container'>
-        {element}
-      </div> */}
-
-      <GetRecipe />
 
     </>
   )

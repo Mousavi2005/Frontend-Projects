@@ -57,7 +57,6 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  /* background-color: antiquewhite; */
 }
 
 input {
@@ -94,8 +93,8 @@ input {
 .ingredients-list {
   width: 100%;
   max-height: 280px;
-  border-bottom: 1px solid black;
-  border-top: 1px solid black;
+  /* border-bottom: 1px solid black;
+  border-top: 1px solid black; */
   padding: 20px 0;
   overflow:scroll;
   margin-top: 20px;
@@ -144,4 +143,9 @@ li {
 .get-recipe-btn:hover {
   cursor: pointer;
   background-color: red;
+}
+
+.ai-recipe {
+  padding: 35px;
+  line-height: 1.5rem;
 }

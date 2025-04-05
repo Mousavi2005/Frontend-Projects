@@ -1,15 +1,23 @@
 import React from "react"
 import IngredientComponent from "./ingredientComponent";
+import Recipe from "./recipeComponent";
+import IngridientsList from "./ingridientsList";
+import RecipeButton from "./recipeButtonComponent";
 
 export default function Interact() {
 
     let [element, setElement] = React.useState([])
+    let [recipeShown, setRecipeshown] = React.useState(false)
 
     function addIngredient(formData) {
 
         const value = formData.get('ingredient')
         setElement(prev => [...prev,value])
 
+    }
+
+    function diplayRecipe() {
+        setRecipeshown(true)
     }
 
     return (
@@ -20,12 +28,16 @@ export default function Interact() {
             </form>
             
             <div className='body-head-text'>
-                <h2>Ingredients on hand : </h2>
+                {(element.length > 0) && <h2>Ingridients on band</h2>}
             </div>
-            <div className="ingredients-list">
-                {element.map((name, index) => <IngredientComponent key={index} name = {name} />)}
+
+            <IngridientsList element = {element} />
+            
+            <RecipeButton element = {element}  recipeShown = {recipeShown} function = {diplayRecipe}/>
+
+            <Recipe isShown = {recipeShown}/>
+
                 
-            </div>
         </>
     )
 }

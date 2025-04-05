@@ -1,10 +1,6 @@
-// import Interact from "./ineract"
-
-export default function getRecipe() {
-    
-    return (
-        <div className="bottom">
-
+export default function recipeButton(props) {
+    return(
+        props.element.length >= 4 && !props.recipeShown && <section className="bottom">
             <div className="recipe-container">
 
                 <div className="text-container">
@@ -12,10 +8,9 @@ export default function getRecipe() {
                     <p>Generate a recipe from your list of ingredients</p>
                 </div>
 
-                <button className="get-recipe-btn">Get a recipe</button>
+                <button onClick={props.function} className="get-recipe-btn">Get a recipe</button>
 
             </div>
-        </div>
-
+        </section>
     )
 }
