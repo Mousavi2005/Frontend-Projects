@@ -1,21 +1,14 @@
 import { useState } from "react"
 
-export default function mainComponent() {
+export default function mainComponent(props) {
     const [top, setTop] = useState('one does not simply')
     const [bottom, setBottom] = useState("walk into mordor")
-    
-    function getMemeBtn(){
-        const topTextInput = document.querySelector('#top-text').value
-        const bottomTextInput = document.querySelector('#bottom-text').value
-        setTop(topTextInput)
-        setBottom(bottomTextInput)
-        // console.log(topTextInput)
-        // console.log(bottomTextInput)
-    }
+    const [imgUrl, setImgUrl] = useState(null)
 
     function handler(event) {
+
         let temp = event.currentTarget.value
-        // setTop(temp)
+
         if (event.currentTarget.id === 'top-text') {
             setTop(temp)
         }
@@ -23,6 +16,11 @@ export default function mainComponent() {
             setBottom(temp)
         }
     }
+
+    function randomMeme() {
+        const randomNumber = Math.floor(Math.random()*100)
+        setImgUrl(props.AllMemes[randomNumber].url)
+      }
 
     return(
         <main>
@@ -50,14 +48,12 @@ export default function mainComponent() {
                         </label>
                     </div>
 
-                {/* <button>Get a new meme image</button> */}
-
             </div>
 
-            <button onClick={getMemeBtn}>Get a new meme image</button>
+            <button onClick={randomMeme}>Get a new meme image</button>
 
             <div className="meme">
-                <img src="./sydney.jpg" alt="" />
+                <img src={imgUrl == null ? 'sydney.jpg' : imgUrl} alt="" />
                 <span id="top-span">{top}</span>
                 <span id="bottom-span">{bottom}</span>
             </div>

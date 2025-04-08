@@ -9,12 +9,13 @@
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
 }
 
-#root {
+/* #root {
   max-width: 1280px;
-}
+} */
 
 .head-text {
-  padding: 5% 10%;
+  padding: 20px 40px;
+  
   background-color: blueviolet;
   font-size: 1.5rem;
   margin-bottom: 20px;
@@ -24,6 +25,8 @@ main {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin: 0 auto;
+  max-width: 650px;
 }
 
 .form {
@@ -34,11 +37,18 @@ main {
 
 }
 
+label {
+  margin: 5px;
+}
 
+input{
+  margin-left: 5px;
+}
 #top-text, #bottom-text{
 height: 30px;
 padding: 4px;
 margin-top: 5px;
+/* margin-left: 5px; */
 border-radius: 5px;
 border: 1px solid black;
 }
