@@ -3,10 +3,12 @@
   margin: 0;
   padding: 0;
   border: none;
+  font-family: Arial, Helvetica, sans-serif;
+
 }
 
 :root {
-  font-family: Inter;
+  font-family: Arial, Helvetica, sans-serif;
   /* line-height: 1.5;
   font-weight: 400;
 
@@ -46,11 +48,20 @@ main {
 
 }
 
+p {
+  text-align: center;
+  font-size: 0.8rem;
+  width: 80%;
+  margin: 15px;
+  margin-bottom: 25px;
+  /* height: 100px; */
+}
+
 .dice-container {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   grid-template-rows: 1fr 1fr;
-  row-gap: 35px;
+  row-gap: 20px;
   column-gap: 20px;
 }
 
@@ -71,8 +82,8 @@ button:hover {
 
 .roll-dice-btn {
   margin-top: 45px;
-  width: 120px;
-  font-size: 1.8rem;
+  width: 220px;
+  font-size: 1.6rem;
   height: 55px;
   background-color: #5035FF;
   color: white;
