@@ -65,7 +65,7 @@ main {
   flex-wrap: wrap;
   justify-content: center;
   row-gap: 12px;
-  margin-top: 100px;
+  margin-top: 70px;
   /* background-color: red; */
   width: 86%;
 }
@@ -79,7 +79,7 @@ main {
 }
 
 .all-letter-container {
-  background-color: red;
+  /* background-color: red; */
   margin-top: 50px;
   display: flex;
   justify-content: center;
@@ -90,6 +90,12 @@ main {
   width: 45px;
   height: 45px;
   border-radius: 5px;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
+  margin: 0 6px;
 }
 
 .keyboard-container {
@@ -111,4 +117,10 @@ main {
 
 .included {
   background-color: green;
+}
+
+.resualt-text {
+  font-size: 4rem;
+  margin-top: 30px;
+  color: white;
 }
