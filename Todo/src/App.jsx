@@ -1,5 +1,9 @@
 import { useEffect, useState } from "react"
 import TaskComponent from "./taskComponent"
+import HeadComponent from "./headComponent"
+import FormComponent from "./formComponent"
+import MobileDesignComponent from "./mobileDesignComponent"
+import DesktopDesignComponent from "./desktopDesignComponent"
 
 let done_tasks = []
 let active_tasks = []
@@ -72,13 +76,14 @@ export default function App() {
     if (show) {
       
       setData(userView)
-      setShow(prev => !prev)
+      // setShow(prev => !prev)
     } else {
 
       let all_tasks = [...active_tasks, ...done_tasks]
       setData(all_tasks)
-      setShow(prev => !prev)
+      // setShow(prev => !prev)
     }
+    setShow(prev => !prev)
   }
 
   function showCompletedTasks() {
@@ -121,60 +126,37 @@ export default function App() {
   return (
     <main>
       <div className="background-container w-full h-[200px] md:h-[230px] bg-[url('../images/bg-mobile-light.jpg')] bg-no-repeat bg-cover dark:bg-[url('../images/bg-mobile-dark.jpg')]">
-        
+
+
         {/* LOGO AND DARK/LIGHT TOGGLE */}
-        <div className="flex justify-between pt-8 pb-6 px-2 w-[80%] max-w-[650px] mx-auto">
-          <span className="text-[35px] text-white">TODO</span>
 
-          <button onClick={toggle}>
-            <img src="../images/icon-moon.svg" alt="moon-icon" className="w-8 h-8 dark:hidden"/>
-            <img src="../images/icon-sun.svg" alt="moon-icon" className="w-8 h-8 hidden dark:block"/>
-          </button>
+        <HeadComponent toggle = {toggle} />
 
-        </div>
 
         {/* FORM */}
-        <form action={submiteHandle} className="relative flex justify-center w-[80%] max-w-[650px] mx-auto">
 
-          <div className="w-5 h-5 ml-[2%] rounded-full absolute left-2 top-1/2 -translate-y-1/2 shadow-md border-[1px] border-black dark:border-[#777a92]"></div>
-          <input type="text" name="input" id="input" placeholder="Create a new todo" className="pl-[max(6.5%,45px)] h-14 md:h-16 w-full rounded-md dark:bg-[#25273c] dark:placeholder-[#777a92] dark:text-[#cacde8]"/>
+        <FormComponent submit = {submiteHandle} />
 
-        </form>
+
+        {/* BODY */}
 
         <div className="tasks-container flex flex-col justify-center items-center mt-3 rounded-lg overflow-hidden w-[80%] max-w-[650px] mx-auto">
+
           {tasks}
 
+
           {/* MOBILE */}
-          <div className="md:hidden flex w-full h-12 justify-between items-center dark:bg-[#25273c] bg-white p-2">
-              <p className="text-xs text-[#9394a5] dark:text-[#777a92]">{active_tasks.length} items left</p>
-              <button onClick={clearCompleted} className="text-xs text-[#9394a5] dark:text-[#777a92] hover:text-[#5462eb] dark:hover:text-[#5462eb]">Clear Completed</button>
-          </div>
+
+          <MobileDesignComponent active_tasks = {active_tasks} clearCompleted = {clearCompleted} showAllTasks = {showAllTasks} showActiveTasks = {showActiveTasks} showCompletedTasks = {showCompletedTasks}
+           show = {show} showAtive = {showAtive} showCompleted = {showCompleted}/>
+
 
           {/* DESKTOP */}
-          <div className="hidden md:flex items-center justify-between w-full max-w-[650px] h-14 md:h-16 p-5 mx-auto bg-white dark:bg-[#25273c]">
-            <p className="text-xs md:text-[#9394a5] dark:text-[#777a92]">{active_tasks.length} items left</p>
 
-            <div className="btn-container flex justify-evenly items-center w-[50%]">
-              <button onClick={showAllTasks} className={`text-lg hover:text-[#5462eb] dark:hover:text-[#5462eb] ${show ? 'md:text-[#5462eb] dark:text-[#5462eb]' : 'md:text-[#484b6a] dark:text-[#777a92]'}`}>All</button>
-              <button onClick={showActiveTasks} className={`text-lg hover:text-[#5462eb] dark:hover:text-[#5462eb] ${showAtive ? 'md:text-[#5462eb] dark:text-[#5462eb]' : 'md:text-[#484b6a] dark:text-[#777a92]'} `}>Active</button>
-              <button onClick={showCompletedTasks} className={`text-lg hover:text-[#5462eb] dark:hover:text-[#5462eb] ${showCompleted ? 'md:text-[#5462eb] dark:text-[#5462eb]' : 'md:text-[#484b6a] dark:text-[#777a92]'}`}>Completed</button>
-            </div>
-
-            <button onClick={clearCompleted} className="text-xs md:text-[#9394a5] dark:text-[#777a92] hover:text-[#5462eb] dark:hover:text-[#5462eb]">Clear Completed</button>
-
-          </div>
+          <DesktopDesignComponent active_tasks = {active_tasks} showAllTasks = {showAllTasks} showActiveTasks = {showActiveTasks} showCompletedTasks = {showCompletedTasks} clearCompleted = {clearCompleted} 
+          show = {show} showAtive = {showAtive} showCompleted = {showCompleted} />
           
         </div>
-
-        {/* MOBILE */}
-        <div className="md:hidden flex w-[80%] max-w-[650px] h-14 p-2 mx-auto mt-5 bg-white dark:bg-[#25273c] rounded-lg">
-            <div className="btn-container flex justify-evenly items-center w-full">
-              <button onClick={showAllTasks} className={`text-lg hover:text-[#5462eb] dark:hover:text-[#5462eb] ${show ? 'text-[#5462eb] dark:text-[#5462eb]' : 'text-[#484b6a] dark:text-[#777a92]'}`}>All</button>
-              <button onClick={showActiveTasks} className={`text-lg hover:text-[#5462eb] dark:hover:text-[#5462eb] ${showAtive ? 'text-[#5462eb] dark:text-[#5462eb]' : 'text-[#484b6a] dark:text-[#777a92]' }`}>Active</button>
-              <button onClick={showCompletedTasks} className={`text-lg hover:text-[#5462eb] dark:hover:text-[#5462eb] ${showCompleted ? 'text-[#5462eb] dark:text-[#5462eb]' : 'text-[#484b6a] dark:text-[#777a92]'}`}>Completed</button>
-            </div>
-        </div>
-
 
       </div>
     </main>

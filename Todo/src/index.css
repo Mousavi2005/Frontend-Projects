@@ -1,5 +1,4 @@
-/* @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&family=Palanquin:wght@100;200;300;400;500;600;700&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Palanquin:wght@100;200;300;400;500;600;700&display=swap"); */
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&family=Palanquin:wght@100;200;300;400;500;600;700&display=swap");
 
 @tailwind base;
 @tailwind components;
@@ -10,49 +9,6 @@
   padding: 0;
   box-sizing: border-box;
   scroll-behavior: smooth;
-  /* border: none; */
+  font-family: 'Montserrat', sans-serif;
 
-}
-
-.unchecked {
-  flex-grow: 0;
-  width: 20px;
-  height: 20px;
-  border: 1px solid black;
-  border-radius: 50%;
-  margin-left: 2%;
-  margin-right: 4.5%;
-}
-
-.dark .unchecked {
-  border: 1px solid #777a92;
-}
-
-.checked {
-  flex-grow: 0;
-  width: 20px;
-  height: 20px;
-  border: 1px solid black;
-  border-radius: 50%;
-  margin-left: 2%;
-  margin-right: 4.5%;
-  background-color: rgb(106, 106, 252);
-  background-image: url('../images/icon-check.svg');
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: 75%;
-  border: none;
-}
-
-
-.left {
-  width: 100%;
-  gap: 4px;
-  padding-left: 5px;
-
-}
-
-.left > p {
-  max-width: 75%;
-  white-space: normal;
 }
