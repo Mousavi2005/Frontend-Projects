@@ -14,33 +14,10 @@
 
 }
 
-.task {
-  width: 100%;
-  padding: 5px 0;
-  min-height: 56px;
-  border-bottom: 1px solid #777a92;
-  /* border: 1px solid gray; */
-  /* border-radius: 8px; */
-  display: flex;
-  align-items: center;
-  /* margin: 2px 0; */
-  
-}
-
-.dark .task {
-  background-color: #25273c;
-}
-
-.task:hover {
-  .right-btn{
-    opacity: 1;
-  }
-}
-
 .unchecked {
   flex-grow: 0;
-  width: 16px;
-  height: 16px;
+  width: 20px;
+  height: 20px;
   border: 1px solid black;
   border-radius: 50%;
   margin-left: 2%;
@@ -53,8 +30,8 @@
 
 .checked {
   flex-grow: 0;
-  width: 16px;
-  height: 16px;
+  width: 20px;
+  height: 20px;
   border: 1px solid black;
   border-radius: 50%;
   margin-left: 2%;
@@ -67,26 +44,10 @@
   border: none;
 }
 
-.draw-line {
-  text-decoration-line: line-through;
-  color: grey;
-}
-
-.dark .draw-line{
-  color: #777a92;
-}
-.dark .no-draw-line {
-  color: #cacde8;
-}
 
 .left {
   width: 100%;
   gap: 4px;
-  /* display: flex;
-  align-items: center;
-  justify-content: center; */
-  /* flex-grow: 0;
-  flex-shrink: 0; */
   padding-left: 5px;
 
 }
@@ -94,16 +55,4 @@
 .left > p {
   max-width: 75%;
   white-space: normal;
-}
-
-.left > button {
-  flex-grow: 0;
-  flex-shrink: 0;
-}
-
-.right-btn {
-  margin-right: 10px;
-  opacity: 0;
-  flex-grow: 0;
-  flex-shrink: 0;
 }
