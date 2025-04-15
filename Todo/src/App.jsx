@@ -1,23 +1,26 @@
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useState } from "react"
 import TaskComponent from "./taskComponent"
 
 let done_tasks = []
 let active_tasks = []
+let userView = []
 
 export default function App() {
-  const [data, setData] = useState([])
-  const [tasks, setTasks] = useState([])
 
-  const Ref = useRef()
+  const [data, setData] = useState(() => [])
+  const [tasks, setTasks] = useState(() => [])
+  const [show, setShow] = useState(() => false)
+  const [showAtive, setShowActive] = useState(() => false)
+  const [showCompleted, setShowCompleted] = useState(() => false)
 
   function submiteHandle(formData) {
-    const value = formData.get('input')
 
+    const value = formData.get('input')
     if (!data.some(item => item.v === value)) {
 
       setData(prev => [...prev, {v:value, c:false}])
       active_tasks.push({v:value, c:false})
-      
+      userView.push({v:value, c:false})
     } else {
 
       alert("You have already added this task")
@@ -38,18 +41,19 @@ export default function App() {
       const deletedValue = data[id].v
       done_tasks.push({v:data[id].v, c:true})
       active_tasks = active_tasks.filter(item => item.v !== deletedValue)
-
+      userView = userView.map((o, index) => index == id ? {v:o.v, c:true} : o)
     } else {
 
       const addedValue = data[id].v
       done_tasks = done_tasks.filter(item => item.v !== addedValue);
       active_tasks.push({v:data[id].v, c:false})
+      userView = userView.map((o, index) => index == id ? {v:o.v, c:false} : o)
     }
-
   }
 
   function deleteTask(id) {
 
+    userView = userView.filter(item => item.v !== data[id].v)
     setData(prev =>
       prev.filter((item, i) => i !== id)
     );
@@ -57,40 +61,61 @@ export default function App() {
 
   function clearCompleted() {
 
+    userView = userView.filter(item => !item.c)
     setData(prev =>
       prev.filter(item => !item.c)
     );
   }
 
   function showAllTasks() {
-    let all_tasks = [...active_tasks, ...done_tasks]
 
-    setData(all_tasks)
+    if (show) {
+      
+      setData(userView)
+      setShow(prev => !prev)
+    } else {
+
+      let all_tasks = [...active_tasks, ...done_tasks]
+      setData(all_tasks)
+      setShow(prev => !prev)
+    }
   }
 
   function showCompletedTasks() {
 
-    setData(done_tasks.map(val => ({v:val.v, c:val.c})))
-    
+    if (showCompleted){
+
+      setData(userView)
+      setShowCompleted(prev => !prev)
+    } else {
+
+      setData(done_tasks.map(val => ({v:val.v, c:val.c})))
+      setShowCompleted(prev => !prev)
+    }
   }
 
   function showActiveTasks() {
 
-    setData(active_tasks.map(val => ({v:val.v, c:val.c})))
-    
+    if (showAtive) {
+
+      setData(userView)
+      setShowActive(prev => !prev)
+    } else {
+
+      setData(active_tasks.map(val => ({v:val.v, c:val.c})))
+      setShowActive(prev => !prev)
+    }
   }
 
   function toggle() {
+
     document.documentElement.classList.toggle('dark');
-    // console.log('clicked')
-    
   }
 
   useEffect(() => {
+
     setTasks(data.map((d, index) => <TaskComponent key= {index} id={index} func={clickTask} function = {deleteTask} value = {d.v} checked={d.c}/>))
-
   }, [data])
-
 
 
   return (
@@ -112,7 +137,7 @@ export default function App() {
         <form action={submiteHandle} className="relative flex justify-center w-[80%] max-w-[650px] mx-auto">
 
           <div className="w-5 h-5 ml-[2%] rounded-full absolute left-2 top-1/2 -translate-y-1/2 shadow-md border-[1px] border-black dark:border-[#777a92]"></div>
-          <input ref={Ref} type="text" name="input" id="input" placeholder="Create a new todo" className="pl-[max(6.5%,45px)] h-14 md:h-16 w-full rounded-md dark:bg-[#25273c] dark:placeholder-[#777a92] dark:text-[#cacde8]"/>
+          <input type="text" name="input" id="input" placeholder="Create a new todo" className="pl-[max(6.5%,45px)] h-14 md:h-16 w-full rounded-md dark:bg-[#25273c] dark:placeholder-[#777a92] dark:text-[#cacde8]"/>
 
         </form>
 
@@ -130,9 +155,9 @@ export default function App() {
             <p className="text-xs md:text-[#9394a5] dark:text-[#777a92]">{active_tasks.length} items left</p>
 
             <div className="btn-container flex justify-evenly items-center w-[50%]">
-              <button onClick={showAllTasks} className="text-lg md:text-[#484b6a] dark:text-[#777a92] hover:text-[#5462eb] dark:hover:text-[#5462eb]">All</button>
-              <button onClick={showActiveTasks} className="text-lg md:text-[#484b6a] dark:text-[#777a92] hover:text-[#5462eb] dark:hover:text-[#5462eb]">Active</button>
-              <button onClick={showCompletedTasks} className="text-lg md:text-[#484b6a] dark:text-[#777a92] hover:text-[#5462eb] dark:hover:text-[#5462eb]">Completed</button>
+              <button onClick={showAllTasks} className={`text-lg hover:text-[#5462eb] dark:hover:text-[#5462eb] ${show ? 'md:text-[#5462eb] dark:text-[#5462eb]' : 'md:text-[#484b6a] dark:text-[#777a92]'}`}>All</button>
+              <button onClick={showActiveTasks} className={`text-lg hover:text-[#5462eb] dark:hover:text-[#5462eb] ${showAtive ? 'md:text-[#5462eb] dark:text-[#5462eb]' : 'md:text-[#484b6a] dark:text-[#777a92]'} `}>Active</button>
+              <button onClick={showCompletedTasks} className={`text-lg hover:text-[#5462eb] dark:hover:text-[#5462eb] ${showCompleted ? 'md:text-[#5462eb] dark:text-[#5462eb]' : 'md:text-[#484b6a] dark:text-[#777a92]'}`}>Completed</button>
             </div>
 
             <button onClick={clearCompleted} className="text-xs md:text-[#9394a5] dark:text-[#777a92] hover:text-[#5462eb] dark:hover:text-[#5462eb]">Clear Completed</button>
@@ -144,9 +169,9 @@ export default function App() {
         {/* MOBILE */}
         <div className="md:hidden flex w-[80%] max-w-[650px] h-14 p-2 mx-auto mt-5 bg-white dark:bg-[#25273c] rounded-lg">
             <div className="btn-container flex justify-evenly items-center w-full">
-              <button onClick={showAllTasks} className="text-lg text-[#484b6a] dark:text-[#777a92] hover:text-[#5462eb] dark:hover:text-[#5462eb]">All</button>
-              <button onClick={showActiveTasks} className="text-lg text-[#484b6a] dark:text-[#777a92] hover:text-[#5462eb] dark:hover:text-[#5462eb]">Active</button>
-              <button onClick={showCompletedTasks} className="text-lg text-[#484b6a] dark:text-[#777a92] hover:text-[#5462eb] dark:hover:text-[#5462eb]">Completed</button>
+              <button onClick={showAllTasks} className={`text-lg hover:text-[#5462eb] dark:hover:text-[#5462eb] ${show ? 'text-[#5462eb] dark:text-[#5462eb]' : 'text-[#484b6a] dark:text-[#777a92]'}`}>All</button>
+              <button onClick={showActiveTasks} className={`text-lg hover:text-[#5462eb] dark:hover:text-[#5462eb] ${showAtive ? 'text-[#5462eb] dark:text-[#5462eb]' : 'text-[#484b6a] dark:text-[#777a92]' }`}>Active</button>
+              <button onClick={showCompletedTasks} className={`text-lg hover:text-[#5462eb] dark:hover:text-[#5462eb] ${showCompleted ? 'text-[#5462eb] dark:text-[#5462eb]' : 'text-[#484b6a] dark:text-[#777a92]'}`}>Completed</button>
             </div>
         </div>
 
