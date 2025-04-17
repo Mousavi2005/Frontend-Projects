@@ -1,9 +1,20 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
+
+let plan
+// let tottalPrice = 0
+// let selectedAddOns = []
+
+const plans = ['Arcade', 'Advanced', 'Pro']
+const addOns = ['Online service', 'Larger storage', 'Customizable profile']
+
 
 export default function MobileBodyComponent(props) {
 
     const [monthOrYear, setMonthOrYear] = useState(() => 'M')
-    const [selected, setSelected] = useState(() => [false,false,false])
+    // const [selected, setSelected] = useState(() => [false,false,false])
+    const [activeBtn, setActiveBtn] = useState(() => [false, false, false])
+    const [selectedAddOns, setSelectedAddOns] = useState(() => [])
+    const [tottalPrice, setTottalPrice] = useState(0)
 
     function setMonthly() {
         
@@ -14,8 +25,130 @@ export default function MobileBodyComponent(props) {
         setMonthOrYear('Y')
     }
 
-    // console.log(monthOrYear)
+    function selectPlan(Index) {
 
+        setActiveBtn(prev => prev.map((i, index) => index == Index ? true : false))
+        plan = plans[Index]
+    }
+    // console.log(selected)
+
+    function selectAddOns(event) {
+
+        if (event.target.checked) {
+
+            if (event.target.name == 'O') {
+                // selectedAddOns.push('Online service')
+                setSelectedAddOns(prev => [...prev, 'Online service'])
+                // console.log(selectedAddOns)
+
+            } else if(event.target.name == 'L') {
+                // selectedAddOns.push('Larger storage')
+                setSelectedAddOns(prev => [...prev, 'Larger storage'])
+
+                // console.log(selectedAddOns)
+
+            } else {
+                // selectedAddOns.push('Customizable profile')
+                setSelectedAddOns(prev => [...prev, 'Customizable profile'])
+
+                // console.log(selectedAddOns)
+            }
+            
+        } else {
+            if (event.target.name == 'O') {
+                // selectedAddOns = selectedAddOns.filter(item => item !== 'Online service')
+                setSelectedAddOns(prev => prev.filter(item => item !== 'Online service'))
+                // console.log(selectedAddOns)
+                
+            } else if(event.target.name == 'L') {
+                // selectedAddOns = selectedAddOns.filter(item => item !== 'Larger storage')
+                setSelectedAddOns(prev => prev.filter(item => item !== 'Larger storage'))
+
+                // console.log(selectedAddOns)
+
+            } else {
+                // selectedAddOns = selectedAddOns.filter(item => item !== 'Customizable profile')
+                setSelectedAddOns(prev => prev.filter(item => item !== 'Customizable profile'))
+
+                // console.log(selectedAddOns)
+
+            }
+        }
+
+    }
+
+    function calculateTottalPrice() {
+        console.log(plan)
+        console.log(selectedAddOns)
+        console.log(monthOrYear)
+        
+        let tottalPrice = 0
+
+        if (monthOrYear == 'M') {
+
+            if (plan == 'Arcade') {
+                tottalPrice += 9
+
+            } else if(plan == 'Advanced') {
+                tottalPrice += 12
+
+            } else {
+                tottalPrice += 15
+
+            }
+
+            if (selectedAddOns.includes('Online service')) {
+                tottalPrice += 1
+
+
+            }
+            if (selectedAddOns.includes('Larger storage')) {
+                tottalPrice += 2
+
+                
+            }
+            if (selectedAddOns.includes('Customizable profile')) {
+                tottalPrice += 2
+
+            }
+            
+        } else {
+            
+            if (plan == 'Arcade') {
+                tottalPrice += 90
+
+            } else if(plan == 'Advanced'){
+                tottalPrice += 120
+
+            } else {
+                tottalPrice += 150
+
+            }
+
+            if (selectedAddOns.includes('Online service')) {
+                tottalPrice += 10
+
+            }if (selectedAddOns.includes('Larger storage')) {
+                tottalPrice += 20
+
+                
+            }if (selectedAddOns.includes('Customizable profile')) {
+                tottalPrice += 20
+
+            }
+        }
+        return tottalPrice
+
+    }
+
+
+
+    useEffect(() => {
+        if (props.step === 4) {
+          setTottalPrice(calculateTottalPrice());
+        }
+      }, [props.step]); 
+      
     return (
         <>
           {props.step === 1 && (
@@ -25,11 +158,13 @@ export default function MobileBodyComponent(props) {
                 Please provide your name, email address and phone number
               </p>
       
-              <form action="" className="flex flex-col w-full mt-4">
+              <form className="flex flex-col w-full mt-4">
                 <label className="my-1">
                   Name
                   <input
+                    id="nameInput"
                     type="text"
+                    name="name"
                     className="w-full p-2 border-2 border-gray-400 rounded"
                     placeholder="e.g. Stephen King"
                   />
@@ -38,7 +173,10 @@ export default function MobileBodyComponent(props) {
                 <label className="my-1">
                   Email
                   <input
+                    id="emailInput"
+
                     type="text"
+                    name="email"
                     className="w-full p-2 border-2 border-gray-400 rounded"
                     placeholder="e.g. stephenking@lorem.com"
                   />
@@ -47,12 +185,16 @@ export default function MobileBodyComponent(props) {
                 <label className="my-1">
                   Phone Number
                   <input
+                    id="phoneInput"
+
                     type="text"
+                    name="phone"
                     className="w-full p-2 border-2 border-gray-400 rounded"
                     placeholder="e.g. +1 234 567 890"
                   />
                 </label>
               </form>
+              
             </div>
           )}
 
@@ -67,7 +209,7 @@ export default function MobileBodyComponent(props) {
 
                 <div className="w-full flex flex-col items-center">
 
-                    <button className="w-full h-20 border-2 border-gray-500 flex justify-start gap-7 rounded-lg my-2 pl-2 hover:border-blue-700">
+                    <button onClick={() => selectPlan(0)} className={`w-full h-20 border-2 flex justify-start gap-7 rounded-lg my-2 pl-2 hover:border-blue-700 ${activeBtn[0] ? 'border-blue-700' : 'border-gray-500'}`}>
                         <img src="../public/assets/images/icon-arcade.svg" alt="arcade-icon" className="w-12"/>
                         <div className="w-16 flex flex-col justify-center">
                             <span className="text-lg">Arcade</span>
@@ -76,7 +218,7 @@ export default function MobileBodyComponent(props) {
                         </div>
                     </button>
 
-                    <button className="w-full h-20 border-2 border-gray-500 flex justify-start gap-7 rounded-lg my-2 pl-2 hover:border-blue-700">
+                    <button onClick={() => selectPlan(1)} className={`w-full h-20 border-2 flex justify-start gap-7 rounded-lg my-2 pl-2 hover:border-blue-700 ${activeBtn[1] ? 'border-blue-700' : 'border-gray-500'}`}>
                         <img src="../public/assets/images/icon-advanced.svg" alt="advanced-icon" className="w-12"/>
                         <div className="w-16 flex flex-col justify-center">
                             <span className="text-lg">Advanced</span>
@@ -85,7 +227,7 @@ export default function MobileBodyComponent(props) {
                         </div>
                     </button>
 
-                    <button className="w-full h-20 border-2 border-gray-500 flex justify-start gap-7 rounded-lg my-2 pl-2 hover:border-blue-700">
+                    <button onClick={() => selectPlan(2)} className={`w-full h-20 border-2 flex justify-start gap-7 rounded-lg my-2 pl-2 hover:border-blue-700 ${activeBtn[2] ? 'border-blue-700' : 'border-gray-500'}`}>
                         <img src="../public/assets/images/icon-pro.svg" alt="pro-icon" className="w-12"/>
                         <div className="w-16 flex flex-col justify-center">
                             <span className="text-lg">Pro</span>
@@ -93,6 +235,7 @@ export default function MobileBodyComponent(props) {
                             {/* <span>2 months free</span> */}
                         </div>
                     </button>   
+                    
                 </div>
 
 
@@ -101,7 +244,7 @@ export default function MobileBodyComponent(props) {
 
                             <label class="cursor-pointer flex gap-1">
                                 Monthly
-                                <input type="radio" name="hi" onChange={setMonthly}/>
+                                <input type="radio" name="hi" onChange={setMonthly} checked/>
                             </label>
 
                             <label class="cursor-pointer flex gap-1">
@@ -132,8 +275,8 @@ export default function MobileBodyComponent(props) {
 
                 <div className="w-full flex flex-col items-center">
 
-                    <div className={`relative w-full h-20 border-2 flex justify-start rounded-lg my-2 pl-2 border-gray-500 ${selected[0] ? 'border-blue-700' : 'border-gray-500' }`}>
-                        <input type="checkbox" className="w-7 mr-5" onChange={() => setSelected(prev => prev.map((o, index) => index == 0 ? !o : o))}/>
+                    <div className={`relative w-full h-20 border-2 flex justify-start rounded-lg my-2 pl-2 ${selectedAddOns.includes('Online service') ? 'border-blue-700' : 'border-gray-500' }`}>
+                        <input type="checkbox" name="O" className="w-7 mr-5" onChange={selectAddOns}/>                     
                         <div className="flex flex-col justify-center">
                             <span className="text-lg">Online service</span>
                             <p className="text-sm">Access to multipllayer games</p>
@@ -141,8 +284,9 @@ export default function MobileBodyComponent(props) {
                         <span className="absolute right-2 top-1/2 -translate-y-1/2 text-blue-700">+${monthOrYear === 'M' ? 1 : 10}/mo</span>
                     </div>
 
-                    <div className={`relative w-full h-20 border-2 flex justify-start rounded-lg my-2 pl-2 border-gray-500 ${selected[1] ? 'border-blue-700' : 'border-gray-500' }`}>
-                        <input type="checkbox" className="w-7 mr-5" onChange={() => setSelected(prev => prev.map((o, index) => index == 1 ? !o : o))}/>
+                    <div className={`relative w-full h-20 border-2 flex justify-start rounded-lg my-2 pl-2 ${selectedAddOns.includes('Larger storage') ? 'border-blue-700' : 'border-gray-500' }`}>
+                        <input type="checkbox" name="L" className="w-7 mr-5" onChange={selectAddOns}/>
+                        {/* onChange={() => setSelected(prev => prev.map((o, index) => index == 1 ? !o : o))} */}
                         <div className="flex flex-col justify-center">
                             <span className="text-lg">Larger storage</span>
                             <p className="text-sm">Extra 1TB of cliud service</p>
@@ -150,8 +294,8 @@ export default function MobileBodyComponent(props) {
                         <span className="absolute right-2 top-1/2 -translate-y-1/2 text-blue-700">+${monthOrYear === 'M' ? 2 : 20}/mo</span>
                     </div>
 
-                    <div className={`relative w-full h-20 border-2 flex justify-start rounded-lg my-2 pl-2 border-gray-500 ${selected[2] ? 'border-blue-700' : 'border-gray-500' }`}>
-                        <input type="checkbox" className="w-7 mr-5" onChange={() => setSelected(prev => prev.map((o, index) => index == 2 ? !o : o))}/>
+                    <div className={`relative w-full h-20 border-2 flex justify-start rounded-lg my-2 pl-2 ${selectedAddOns.includes('Customizable profile') ? 'border-blue-700' : 'border-gray-500' }`}>
+                        <input type="checkbox" name="C" className="w-7 mr-5" onChange={selectAddOns}/>
                         <div className="flex flex-col justify-center">
                             <span className="text-lg">Customizable profile</span>
                             <p className="text-sm"> Custom theme on your profile</p>
@@ -163,6 +307,64 @@ export default function MobileBodyComponent(props) {
                 </div>
                         
             </div>)}
+
+
+            {props.step === 4 && (
+
+            <div className="z-[1] w-[94%] bg-white rounded-xl px-8 py-8 flex flex-col ">
+
+                <h2 className="text-3xl">Finishing up</h2>
+                <p className="text-xl max-w-[80%] text-gray-400 mt-2">
+                Double-check everything looks OK before confirming
+                </p>
+
+                <div className="w-full flex flex-col items-center">
+
+                    {/* PLAN */}
+
+                    <div className="w-[90%] flex justify-between items-center my-3 border-b border-black pb-4">
+                        <div className="flex flex-col">
+                            <span className="text-lg">Plan</span>
+                            <button className="text-gray-600 underline decoration-2">Change</button>
+                        </div>
+
+                        <span>price</span>
+                    </div>
+
+                    {/* ADD ONS */}
+
+                    <div className="w-[90%]">
+
+                        <div className={`${selectedAddOns.includes('Online service') ? 'block' : 'hidden'} h-8 flex items-center justify-between`}>
+                            <span>Online service</span>
+                            <span>e</span>
+                        </div>
+
+                        <div className={`${selectedAddOns.includes('Larger storage') ? 'block' : 'hidden'} h-8 flex items-center justify-between`}>
+                            <span>Larger storage</span>
+                            <span></span>
+                        </div>
+
+                        <div className={`${selectedAddOns.includes('Customizable profile') ? 'block' : 'hidden'} h-8 flex items-center justify-between`}>
+                            <span>Customizable profile</span>
+                            <span></span>
+                        </div>
+                    </div>
+
+                    {/* TOTTAL */}
+
+                    <div className="w-[90%] flex justify-between mt-8">
+                        <span>Tottal (per {monthOrYear == 'M' ? 'month' : 'year'})</span>
+                        <span>{tottalPrice}</span>
+                    </div>
+
+
+                </div>
+                        
+            </div>)}
+
+
+
 
         </>
       )

@@ -1,8 +1,20 @@
 import MobileHeadComponent from "./mobilehead"
 import MobileBodyComponent from "./mobileBody"
 import MobileBottomComponent from "./mobileBottom"
+import { useState } from "react"
 
 export default function mobileDesign() {
+
+    const [step, setStep] = useState(() => 1)
+
+    function addStep() {
+        setStep(prev => prev + 1)
+    }
+
+    function minusStep() {
+        setStep(prev => prev - 1)
+    }
+
     return (
         <div className="w-full h-full flex flex-col items-center">
 
@@ -10,9 +22,9 @@ export default function mobileDesign() {
         
             <MobileHeadComponent />
 
-            <MobileBodyComponent step = {3} />
+            <MobileBodyComponent step = {step} />
 
-            <MobileBottomComponent step = {2} />
+            <MobileBottomComponent minus = {minusStep} add = {addStep} step = {step} />
 
 
         </div>
