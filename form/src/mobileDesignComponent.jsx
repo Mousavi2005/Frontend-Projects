@@ -27,9 +27,15 @@ export default function mobileDesign() {
 
             <div className=" absolute z-0 w-full h-[20%] bg-[url('../public/assets/images/bg-sidebar-mobile.svg')] bg-no-repeat bg-center bg-cover"></div>
         
-            <MobileHeadComponent step = {step} />
+            {/* <MobileHeadComponent step = {step} /> */}
+            <div className="z-[1] flex w-[60%] h-fit justify-around my-10">
+                <MobileHeadComponent step = {step} />
 
-            <MobileBodyComponent val = {validation} step = {step} setStep = {setStep}/>
+            </div>
+
+            <MobileBodyComponent val = {validation} step = {step} setStep = {setStep} isdesktop = {false}/>
+
+
 
             <MobileBottomComponent passValidation = {getValidation} minus = {minusStep} add = {addStep} step = {step} />
 

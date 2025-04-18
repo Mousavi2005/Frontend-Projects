@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 
 let plan
+let planPrice = 0
 // let tottalPrice = 0
 // let selectedAddOns = []
 
@@ -142,6 +143,38 @@ export default function MobileBodyComponent(props) {
 
     }
 
+    // useEffect(() => {} , [plan])
+
+    function calculatePlanPrice() {
+
+        if (monthOrYear == 'M') {
+            
+            if (plan == 'Arcade') {
+                return 9
+            } else if (plan == 'Advanced') {
+                return 12
+            } else if (plan == 'Pro') {
+                return 15
+            }
+        }
+        else if (monthOrYear == 'Y') {
+            
+            if (plan == 'Arcade') {
+                return 90
+            } else if (plan == 'Advanced') {
+                return 120
+            } else if (plan == 'Pro') {
+                return 150
+            }
+        }
+
+    }
+
+    useEffect(() => {
+        planPrice = calculatePlanPrice()
+    } , [plan])
+
+
 
 
     useEffect(() => {
@@ -231,33 +264,38 @@ export default function MobileBodyComponent(props) {
             <div className="z-[1] w-[94%] bg-white rounded-xl px-8 py-8 flex flex-col ">
 
                 <h2 className="text-3xl">Select your plan</h2>
-                <p className="text-xl max-w-[80%] text-gray-400 mt-2">
+                <p className={`text-xl ${props.isdesktop ? 'max-w-[90%] mb-10' : 'max-w-[80%]'} text-gray-400 mt-2`}>
                 You have the option of monthly or yearly billing
                 </p>
 
-                <div className="w-full flex flex-col items-center">
+                {/* <div className="w-full flex flex-col items-center"> */}
+                <div className={`w-full flex items-center ${props.isdesktop ? 'flex-row gap-2' : 'flex-col'}`}>
 
-                    <button onClick={() => selectPlan(0)} className={`w-full h-20 border-2 flex justify-start gap-7 rounded-lg my-2 pl-2 hover:border-blue-700 ${activeBtn[0] ? 'border-blue-700' : 'border-gray-500'}`}>
+
+                    <button onClick={() => selectPlan(0)} 
+                            className={`${props.isdesktop ? 'flex-1 h-36 pt-2' : 'w-full h-20 pl-2'} border-2 flex ${props.isdesktop ? 'flex-col items-center' : 'flex-row justify-start'} gap-7 rounded-lg my-2 hover:border-blue-700 ${activeBtn[0] ? 'border-blue-700' : 'border-gray-500'}`}>
                         <img src="../public/assets/images/icon-arcade.svg" alt="arcade-icon" className="w-12"/>
-                        <div className="w-16 flex flex-col justify-center">
+                        <div className="w-16 flex flex-col justify-center items-center">
                             <span className="text-lg">Arcade</span>
                             <span className="text-sm">${monthOrYear === 'M' ? 9 : 90}/mo</span>
                             {/* <span>2 months free</span> */}
                         </div>
                     </button>
 
-                    <button onClick={() => selectPlan(1)} className={`w-full h-20 border-2 flex justify-start gap-7 rounded-lg my-2 pl-2 hover:border-blue-700 ${activeBtn[1] ? 'border-blue-700' : 'border-gray-500'}`}>
+                    <button onClick={() => selectPlan(1)} 
+                            className={`${props.isdesktop ? 'flex-1 h-36 pt-2' : 'w-full h-20 pl-2'} border-2 flex ${props.isdesktop ? 'flex-col items-center' : 'flex-row justify-start'} gap-7 rounded-lg my-2 hover:border-blue-700 ${activeBtn[1] ? 'border-blue-700' : 'border-gray-500'}`}>
                         <img src="../public/assets/images/icon-advanced.svg" alt="advanced-icon" className="w-12"/>
-                        <div className="w-16 flex flex-col justify-center">
-                            <span className="text-lg">Advanced</span>
+                        <div className="w-16 flex flex-col justify-center items-center">
+                            <span className="text-lg w-fit">Advanced</span>
                             <span className="text-sm">${monthOrYear === 'M' ? 12 : 120}/mo</span>
                             {/* <span>2 months free</span> */}
                         </div>
                     </button>
 
-                    <button onClick={() => selectPlan(2)} className={`w-full h-20 border-2 flex justify-start gap-7 rounded-lg my-2 pl-2 hover:border-blue-700 ${activeBtn[2] ? 'border-blue-700' : 'border-gray-500'}`}>
+                    <button onClick={() => selectPlan(2)} 
+                            className={`${props.isdesktop ? 'flex-1 h-36 pt-2' : 'w-full h-20 pl-2'} border-2 flex ${props.isdesktop ? 'flex-col items-center' : 'flex-row justify-start'} gap-7 rounded-lg my-2 hover:border-blue-700 ${activeBtn[2] ? 'border-blue-700' : 'border-gray-500'}`}>
                         <img src="../public/assets/images/icon-pro.svg" alt="pro-icon" className="w-12"/>
-                        <div className="w-16 flex flex-col justify-center">
+                        <div className="w-16 flex flex-col justify-center items-center">
                             <span className="text-lg">Pro</span>
                             <span className="text-sm">${monthOrYear === 'M' ? 15 : 150}/mo</span>
                             {/* <span>2 months free</span> */}
@@ -352,11 +390,11 @@ export default function MobileBodyComponent(props) {
 
                     <div className="w-[90%] flex justify-between items-center my-3 border-b border-black pb-4">
                         <div className="flex flex-col">
-                            <span className="text-lg">Plan</span>
+                            <span className="text-lg">{plan}</span>
                             <button onClick={() => props.setStep(2)} className="text-gray-600 underline decoration-2">Change</button>
                         </div>
 
-                        <span>price</span>
+                        <span>{planPrice}</span>
                     </div>
 
                     {/* ADD ONS */}
@@ -365,17 +403,19 @@ export default function MobileBodyComponent(props) {
 
                         <div className={`${selectedAddOns.includes('Online service') ? 'block' : 'hidden'} h-8 flex items-center justify-between`}>
                             <span>Online service</span>
-                            <span>e</span>
+                            <span>{monthOrYear === 'M' ? '+$1/mon' : '+$10/yr'}</span>
                         </div>
 
                         <div className={`${selectedAddOns.includes('Larger storage') ? 'block' : 'hidden'} h-8 flex items-center justify-between`}>
                             <span>Larger storage</span>
-                            <span></span>
+                            <span>{monthOrYear === 'M' ? '+$2/mon' : '+$20/yr'}</span>
+
                         </div>
 
                         <div className={`${selectedAddOns.includes('Customizable profile') ? 'block' : 'hidden'} h-8 flex items-center justify-between`}>
                             <span>Customizable profile</span>
-                            <span></span>
+                            <span>{monthOrYear === 'M' ? '+$2/mon' : '+$20/yr'}</span>
+
                         </div>
                     </div>
 
@@ -383,7 +423,7 @@ export default function MobileBodyComponent(props) {
 
                     <div className="w-[90%] flex justify-between mt-8">
                         <span>Tottal (per {monthOrYear == 'M' ? 'month' : 'year'})</span>
-                        <span>{tottalPrice}</span>
+                        <span>${tottalPrice}/{monthOrYear == 'M' ? 'mon' : 'yr'}</span>
                     </div>
 
 
