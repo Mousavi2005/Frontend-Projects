@@ -105,7 +105,7 @@ export default function mobileBottomComponent(props) {
             (<div className="w-full h-full flex items-end flex-grow-0">
 
             <div className="bg-white w-full h-24 flex justify-end items-center px-3">
-                <button onClick={handleInfo} className="w-[120px] h-[50px] bg-blue-800 text-white rounded text-lg">Next Step</button>
+                <button onClick={handleInfo} className="w-[120px] h-[50px] bg-[#022959] text-white rounded text-lg hover:bg-[#adbeff]">Next Step</button>
             </div>
 
             </div>)}
@@ -116,8 +116,8 @@ export default function mobileBottomComponent(props) {
             (<div className="w-full h-full flex items-end flex-grow-0">
 
             <div className="bg-white w-full h-24 flex justify-between items-center px-3">
-                <button onClick={props.minus}>Go Back</button>
-                <button onClick={props.add} className="w-[120px] h-[50px] bg-blue-800 text-white rounded text-lg">{props.step == 4 ? 'Confirm' : 'Next Step'}</button>
+                <button onClick={props.minus} className="hover:text-[#022959] text-[#9699ab] font-bold">Go Back</button>
+                <button onClick={props.add} className="w-[120px] h-[50px] bg-[#022959] text-white rounded text-lg hover:bg-[#adbeff]">{props.step == 4 ? 'Confirm' : 'Next Step'}</button>
             </div>
 
             </div>)}           
