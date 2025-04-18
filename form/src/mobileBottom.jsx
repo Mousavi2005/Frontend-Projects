@@ -1,24 +1,100 @@
+import { useEffect, useState } from "react";
+
+let validate = [{case1:true, case2:true}, {case1:true, case2:true}, {case1:true, case2:true}]
+let userInformation = {name: '', email: '' , phoneNumber:''}
+
+
 export default function mobileBottomComponent(props) {
+
+    const [validation, setValidation] = useState(() => [])
+    // let validat = [{case1:true, case2:true}, {case1:true, case2:true}, {case1:true, case2:true}]
 
     function isValidEmail(email) {
         const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         return regex.test(email);
     }
 
+    function isValidPhoneNumber(phone) {
+        const regex = /^\+\d{1,3} \d{3} \d{3} \d{3}$/;
+        return regex.test(phone);
+    }
+
     function handleInfo() {
         // props.add()
         const name = document.querySelector('#nameInput').value
-        const email = document.querySelector('#nameInput').value
-        const phone = document.querySelector('#nameInput').value
+        const email = document.querySelector('#emailInput').value
+        const phone = document.querySelector('#phoneInput').value
+
         if (name == '') {
-            alert("Please enter your name")
+
+            validate = validate.map((o, index) => index === 0 ? {case1:false, case2:false} :o)
         }
-        if (!isValidEmail(email)) {
-            alert("Please enter valid email")
+
+        else if (name.length < 4) {
+            validate = validate.map((o, index) => index === 0 ? {case1:true, case2:false} :o)
+
+        } 
+        
+        else {
+            validate = validate.map((o, index) => index === 0 ? {case1:true, case2:true} :o)
+
         }
-        console.log(name)
-        console.log(isValidEmail(email))
+
+
+        if (email == '') {
+            validate = validate.map((o, index) => index === 1 ? {case1:false, case2:false} :o)
+
+        }
+
+        else if (!isValidEmail(email)) {
+
+            validate = validate.map((o, index) => index === 1 ? {case1:true, case2:false} :o)
+
+        } else {
+
+            validate = validate.map((o, index) => index === 1 ? {case1:true, case2:true} :o)
+        }
+
+
+        if (phone == '') {
+
+            validate = validate.map((o, index) => index === 2 ? {case1:false, case2:false} :o)
+        }
+
+        else if(!isValidPhoneNumber(phone)) {
+
+            validate = validate.map((o, index) => index === 2 ? {case1:true, case2:false} :o)
+        } else {
+
+            validate = validate.map((o, index) => index === 2 ? {case1:true, case2:true} :o)
+        }
+
+        setValidation(validate)
     }
+
+    useEffect(() => {
+
+        if (validation[0] !== undefined && (validation[0].case1) && (validation[0].case2) && (validation[1].case1) && (validation[1].case2) && (validation[2].case1) && (validation[2].case2)){
+
+            const name = document.querySelector('#nameInput').value
+            const email = document.querySelector('#emailInput').value
+            const phone = document.querySelector('#phoneInput').value
+
+            userInformation.name = name
+            userInformation.email = email
+            userInformation.phoneNumber = phone
+
+            props.add()
+        } 
+        
+        else {
+
+            props.passValidation(validation);
+        }
+    }, [validation]);
+    
+
+    console.log(userInformation)
 
 
     return (

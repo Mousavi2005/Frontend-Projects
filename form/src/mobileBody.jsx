@@ -15,6 +15,7 @@ export default function MobileBodyComponent(props) {
     const [activeBtn, setActiveBtn] = useState(() => [false, false, false])
     const [selectedAddOns, setSelectedAddOns] = useState(() => [])
     const [tottalPrice, setTottalPrice] = useState(0)
+    const [v, setv] = useState([])
 
     function setMonthly() {
         
@@ -78,9 +79,9 @@ export default function MobileBodyComponent(props) {
     }
 
     function calculateTottalPrice() {
-        console.log(plan)
-        console.log(selectedAddOns)
-        console.log(monthOrYear)
+        // console.log(plan)
+        // console.log(selectedAddOns)
+        // console.log(monthOrYear)
         
         let tottalPrice = 0
 
@@ -149,6 +150,24 @@ export default function MobileBodyComponent(props) {
         }
       }, [props.step]); 
       
+
+
+
+    // console.log(props.val)/
+    useEffect(() => {
+        setv(props.val)
+    }, [props.val])
+
+    // if (v !== undefined && (v[0].case1) && (v[0].case2) && (v[1].case1) && (v[1].case2) && (v[2].case1) && (v[2].case2)){
+
+    // }
+
+    // if (props.val.length !== 0) {
+    //     setv(props.val)
+    // }
+    // console.log(v)
+    // console.log('//////////////')
+
     return (
         <>
           {props.step === 1 && (
@@ -160,36 +179,45 @@ export default function MobileBodyComponent(props) {
       
               <form className="flex flex-col w-full mt-4">
                 <label className="my-1">
-                  Name
+                    <div className="w-full flex justify-between">
+                        <span>Name</span>
+                        <span className="text-sm text-red-600">{ (v[0] !== undefined && v[0].case1 === false)? "This field is required" : (v[0] !== undefined && v[0].case2 === false) ? 'At least 4 charachters' : '' }</span>
+                    </div>
                   <input
                     id="nameInput"
                     type="text"
                     name="name"
-                    className="w-full p-2 border-2 border-gray-400 rounded"
+                    className={`focus:outline-none w-full p-2 border-2 ${ ((v[0] === undefined) || ( (v[0].case1 === true) && (v[0].case2 === true)) ) ? 'border-gray-400 rounded' : 'border-red-400 rounded' }`}
                     placeholder="e.g. Stephen King"
                   />
                 </label>
       
                 <label className="my-1">
-                  Email
+                    <div className="w-full flex justify-between">
+                        <span>Email</span>
+                        <span className="text-sm text-red-600">{ (v[1] !== undefined && v[1].case1 === false)? "This field is required" : (v[1] !== undefined && v[1].case2 === false) ? 'Enter valid email' : '' }</span>
+                    </div>
                   <input
                     id="emailInput"
 
                     type="text"
                     name="email"
-                    className="w-full p-2 border-2 border-gray-400 rounded"
+                    className={`focus:outline-none w-full p-2 border-2 ${ ((v[1] === undefined) || ( (v[1].case1 === true) && (v[1].case2 === true)) ) ? 'border-gray-400 rounded' : 'border-red-400 rounded' }`}
                     placeholder="e.g. stephenking@lorem.com"
                   />
                 </label>
       
                 <label className="my-1">
-                  Phone Number
+                <   div className="w-full flex justify-between">
+                        <span>Phon number</span>
+                        <span className="text-sm text-red-600">{ (v[2] !== undefined && v[2].case1 === false)? "This field is required" : (v[0] !== undefined && v[0].case2 === false) ? 'Enter valid phone number' : '' }</span>
+                    </div>
                   <input
                     id="phoneInput"
 
                     type="text"
                     name="phone"
-                    className="w-full p-2 border-2 border-gray-400 rounded"
+                    className={`focus:outline-none w-full p-2 border-2 ${ ((v[2] === undefined) || ( (v[2].case1 === true) && (v[2].case2 === true)) ) ? 'border-gray-400 rounded' : 'border-red-400 rounded' }`}
                     placeholder="e.g. +1 234 567 890"
                   />
                 </label>
@@ -325,7 +353,7 @@ export default function MobileBodyComponent(props) {
                     <div className="w-[90%] flex justify-between items-center my-3 border-b border-black pb-4">
                         <div className="flex flex-col">
                             <span className="text-lg">Plan</span>
-                            <button className="text-gray-600 underline decoration-2">Change</button>
+                            <button onClick={() => props.setStep(2)} className="text-gray-600 underline decoration-2">Change</button>
                         </div>
 
                         <span>price</span>
@@ -361,6 +389,23 @@ export default function MobileBodyComponent(props) {
 
                 </div>
                         
+            </div>)}
+
+
+            {props.step === 5 && (
+
+            <div className="z-[1] w-[94%] bg-white rounded-xl px-8 py-16 flex justify-center">
+                <div className="w-[80%] flex flex-col items-center content-center">
+
+                    <img src="../public/assets/images/icon-thank-you.svg" alt="thank you icon" className="w-16 mb-5" />
+                    <h2 className="text-2xl mb-3">Thank you!</h2>
+                    <p className="text-center">
+                        Thanks for confirming your subscribtion!
+                        We hope you have fun using our platform.If you ever need support, Please feel free to 
+                        email us at support@loremgaming.com.
+                    </p>
+
+                </div>         
             </div>)}
 
 
