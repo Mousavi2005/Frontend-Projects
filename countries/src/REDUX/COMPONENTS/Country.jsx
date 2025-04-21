@@ -10,11 +10,11 @@ export default function Country(props) {
     const allData = useSelector(state => state.allData).alldata
     const dispatch = useDispatch()
     const navigate = useNavigate();
-    // console.log
+    // console.log("Country called")
     function handleDetail(id) {
         const selecteCountryInfo = allData.filter(item => item.cca3 == id)[0]
-        console.log(selecteCountryInfo)
-        console.log("}}}}")
+        // console.log(selecteCountryInfo)
+        // console.log("}}}}")
 
         dispatch(setClickedToTrue({
             id: selecteCountryInfo.cca3,
@@ -36,7 +36,7 @@ export default function Country(props) {
 
 
     return(
-        <div onClick={() => handleDetail(props.id)} className="w-[94%] h-[450px] bg-white rounded-md shadow-custom-strong hover:cursor-pointer overflow-hidden">
+        <div onClick={() => handleDetail(props.id)} className="w-[94%] md:w-[22%] md:min-w-52 h-[450px] bg-white rounded-md shadow-custom-strong hover:cursor-pointer overflow-hidden">
 
             <div className={`w-full h-[45%]`} style={{background: `url(${props.flag})`, backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat'}}></div>
 

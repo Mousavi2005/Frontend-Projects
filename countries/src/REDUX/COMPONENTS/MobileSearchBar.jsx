@@ -31,6 +31,9 @@ export default function MobileSearchBar() {
         dispatch(setShowData(allData))
       }, [allData])
     
+
+
+      
       function handleOption(e) {
     
         selectedRegion = e.target.value
