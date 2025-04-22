@@ -33,7 +33,7 @@ export default function SelectOption() {
 
     return (
 
-        <select className='w-60 ml-7 mb-4 p-3 bg-white rounded-xl h-14'
+        <select className='w-60 ml-7 mb-4 p-3 bg-white rounded-xl h-14 dark:bg-[#2b3945] dark:text-white'
           defaultValue=''
         >
           <option value="" disabled hidden>

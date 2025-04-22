@@ -36,7 +36,7 @@ export default function Country(props) {
 
 
     return(
-        <div onClick={() => handleDetail(props.id)} className="w-[94%] md:w-[22%] md:min-w-52 h-[450px] bg-white rounded-md shadow-custom-strong hover:cursor-pointer overflow-hidden">
+        <div onClick={() => handleDetail(props.id)} className="w-[94%] max-w-[350px] md:w-[22%] md:max-w-72 md:min-w-60 h-[450px] bg-white dark:bg-[#2b3945] dark:text-white rounded-md shadow-custom-strong hover:cursor-pointer overflow-hidden">
 
             <div className={`w-full h-[45%]`} style={{background: `url(${props.flag})`, backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat'}}></div>
 

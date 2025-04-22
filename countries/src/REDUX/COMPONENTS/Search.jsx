@@ -18,13 +18,14 @@ export default function Search () {
     }
 
     return(
-        <div className="w-full h-[15%] md:h-32 p-3 my-5 flex justify-center items-center ">
+        <div className="w-full md:h-32 p-3 my-5 flex justify-center items-center ">
 
-            <form action={handleSearch} className="w-[94%] h-[50%] flex items-center shadow-search-boxshadow rounded-md p-4 pl-8 md:p-2 md:pl-6 gap-8 bg-white">
+            <form action={handleSearch} className="w-[94%] h-[50%] flex items-center shadow-search-boxshadow rounded-md p-4 pl-8 md:p-2 md:pl-6 gap-8 bg-white dark:bg-[#2b3945]">
                 <button type="submit" className="">
-                    <img src="/Icons/magnifying.svg" alt="icon" className="h-5 opacity-50"></img>
+                    <img src="/Icons/magnifying.svg" alt="icon" className="h-5 opacity-50 dark:hidden"></img>
+                    <img src="/Icons/magnifying-darkmode.svg" alt="icon" className="h-5 opacity-50 hidden dark:block"></img>
                 </button>
-                <input type="text" name="search" placeholder="search for a country..." className="w-full h-[50%] md:h-full focus:outline-none"/>
+                <input type="text" name="search" placeholder="search for a country..." className="w-full h-[50%] md:h-full focus:outline-none dark:bg-[#2b3945] dark:placeholder-white dark:text-white"/>
             </form>
 
         </div>

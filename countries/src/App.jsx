@@ -22,7 +22,7 @@ function App() {
               <DesktopDesign />
               </>
           }/>
-          {/* <Route path='/detail' element={<CountryDetail />} /> */}
+          <Route path='/detail' element={<CountryDetail />} />
         </Routes>
       </Router>
 
